@@ -8,13 +8,13 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 RUN apt-get update
-RUN apt install -y libgl1-mesa-glx
+RUN apt-get install -y libgl1-mesa-glx libglib2.0-0 libsm6 libxrender1 libxext6
 
 # Install pip requirements
 COPY requirements.txt .
 RUN python -m pip install -r requirements.txt --user
-RUN python -m pip install jupyterlab --user
-
+RUN python -m pip install jupyter -U
+RUN python -m pip install jupyterlab
 
 WORKDIR /app
 COPY . /app
